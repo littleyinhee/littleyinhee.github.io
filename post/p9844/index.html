@@ -1,0 +1,298 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>P9844 | yinhee</title>
+<link rel="shortcut icon" href="https://littleyinhee.github.io/favicon.ico?v=1723204610414">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://littleyinhee.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="P9844 | yinhee - Atom Feed" href="https://littleyinhee.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="先致敬 houzhe 学长经典：
+
+我看到我的队友写了个又臭又长的线段树，维护了一堆 tag，于是一脚把他踹下去，写了个线段树维护矩阵，然后就过了。
+
+回到这题，题意即为求一段连续的版本 [x,y][x,y][x,y] 中,所有版本的区间 ..." />
+    <meta name="keywords" content="矩阵,数据结构" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://littleyinhee.github.io">
+  <img class="avatar" src="https://littleyinhee.github.io/images/avatar.png?v=1723204610414" alt="">
+  </a>
+  <h1 class="site-title">
+    yinhee
+  </h1>
+  <p class="site-description">
+    梦境原来就是回忆的足迹
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              P9844
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-05-27
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+                <a href="https://littleyinhee.github.io/tag/4YQrnlKOs/" class="post-tag">
+                  # 矩阵
+                </a>
+              
+                <a href="https://littleyinhee.github.io/tag/62NLXw5-u0/" class="post-tag">
+                  # 数据结构
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>先致敬 houzhe 学长经典：</p>
+<blockquote>
+<p>我看到我的队友写了个又臭又长的线段树，维护了一堆 tag，于是<strong>一脚把他踹下去</strong>，写了个<strong>线段树维护矩阵</strong>，然后就过了。</p>
+</blockquote>
+<p>回到这题，题意即为求一段连续的版本 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[x,y]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span></span></span></span> 中,所有版本的区间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>l</mi><mo separator="true">,</mo><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[l,r]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span> 的值的平方和。</p>
+<p>首先显然可以变成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>y</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,y]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">]</span></span></span></span> 版本的答案减去 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>x</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,x]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">]</span></span></span></span> 版本的答案。然后变成一个历史版本和问题。解决历史版本和问题自然会想到维护矩阵。当然你打 tag 也是可以的，但是这样的话建议还是从矩阵的角度去推更新，否则很容易出问题。</p>
+<p>具体地，SGT 上每个位置维护一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4\times 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span> 的矩阵，记录区间和，区间平方和，区间长度和区间历史版本和四个量，把 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mo>(</mo><msub><mi>a</mi><mi>i</mi></msub><mo>+</mo><mi>k</mi><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum(a_i+k)^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 套路化地拆成 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><msubsup><mi>a</mi><mi>i</mi><mn>2</mn></msubsup><mo>+</mo><mo>∑</mo><msub><mi>a</mi><mi>i</mi></msub><mo>×</mo><mi>k</mi><mo>+</mo><mi>l</mi><mi>e</mi><mi>n</mi><mo>×</mo><msup><mi>k</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum a_i^2+\sum a_i\times k+len\times k^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.072772em;vertical-align:-0.258664em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>，这也是一个矩阵很好维护的形式。每做完一次操作之后更新历史和即可。</p>
+<p>细节不是很多，需要注意的有：</p>
+<ul>
+<li>
+<p>tag 的矩阵初始值是单位矩阵而不是全 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 矩阵。</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和更新的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 都可能是负数。</p>
+</li>
+</ul>
+<p>结束了。跑的还挺快……吗？至少过了而且不是最劣解。/kk</p>
+<p>code：</p>
+<pre><code class="language-cpp">int n,m,q,a[N],ans[N];
+struct node{int l,r,x;}b[N];
+struct Node{int l,r,s,id;};
+vector&lt;Node&gt; g[N];
+il int Mod(int x,int y){return x+y&gt;=mod?x+y-mod:x+y;}
+struct SGT{
+	struct mat{
+		int a[4][4];
+		mat(){mems(a,0);}
+		il void reset(){mems(a,0);rep(i,0,3)a[i][i]=1;}
+		il mat operator*(const mat &amp;rhs)const{
+			mat r;
+			rep(k,0,3)rep(i,0,3)rep(j,0,3)r.a[i][j]=Mod(r.a[i][j],1ll*a[i][k]*rhs.a[k][j]%mod);
+			return r;
+		}
+		il mat operator+(const mat &amp;rhs)const{
+			mat r;
+			rep(i,0,3)rep(j,0,3)r.a[i][j]=Mod(a[i][j],rhs.a[i][j]);
+			return r;
+		}
+	};
+	struct Tnode{mat x,tag;}tr[N&lt;&lt;2];
+	il void pushup(int o){tr[o].x=tr[o&lt;&lt;1].x+tr[o&lt;&lt;1|1].x;}
+	il void reset(int o,mat &amp;k){tr[o].x=tr[o].x*k,tr[o].tag=tr[o].tag*k;}
+	il void pushdown(int o){reset(o&lt;&lt;1,tr[o].tag),reset(o&lt;&lt;1|1,tr[o].tag),tr[o].tag.reset();}
+	void build(int l,int r,int o){
+		tr[o].tag.reset();
+		if(l==r)return tr[o].x.a[0][0]=Mod(a[l],mod),tr[o].x.a[0][1]=1ll*a[l]*a[l]%mod,tr[o].x.a[0][2]=1,void();
+		int mid=(l+r)&gt;&gt;1;
+		build(l,mid,o&lt;&lt;1),build(mid+1,r,o&lt;&lt;1|1);
+		pushup(o);
+	}
+	void update(int l,int r,int o,int x,int y,mat k){
+		if(l&gt;=x&amp;&amp;r&lt;=y)return reset(o,k);
+		pushdown(o);
+		int mid=(l+r)&gt;&gt;1;
+		if(x&lt;=mid)update(l,mid,o&lt;&lt;1,x,y,k);
+		if(y&gt;mid)update(mid+1,r,o&lt;&lt;1|1,x,y,k);
+		pushup(o);
+	}
+	int query(int l,int r,int o,int x,int y){
+		if(r&lt;x||l&gt;y)return 0;
+		if(l&gt;=x&amp;&amp;r&lt;=y)return tr[o].x.a[0][3];
+		pushdown(o);
+		int mid=(l+r)&gt;&gt;1;
+		return Mod(query(l,mid,o&lt;&lt;1,x,y),query(mid+1,r,o&lt;&lt;1|1,x,y));
+	}
+}T;
+void Yorushika(){
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;q),m++;
+	rep(i,1,n)scanf(&quot;%d&quot;,&amp;a[i]);
+	rep(i,2,m)scanf(&quot;%d%d%d&quot;,&amp;b[i].l,&amp;b[i].r,&amp;b[i].x);
+	rep(i,1,q){
+		int l,r,x,y;scanf(&quot;%d%d%d%d&quot;,&amp;l,&amp;r,&amp;x,&amp;y);
+		g[x].eb((Node){l,r,-1,i}),g[y+1].eb((Node){l,r,1,i});
+	}
+	T.build(1,n,1),b[1]={1,1,0};
+	SGT::mat x;x.reset();
+	rep(i,1,m){
+		SGT::mat tmp;int x=b[i].x;
+		tmp.a[0][0]=1,tmp.a[0][1]=Mod(2ll*x%mod,mod);
+		tmp.a[1][1]=1;
+		tmp.a[2][0]=Mod(x,mod),tmp.a[2][1]=1ll*x*x%mod,tmp.a[2][2]=1;
+		tmp.a[3][3]=1;
+		T.update(1,n,1,b[i].l,b[i].r,tmp);
+		tmp.reset(),tmp.a[1][3]=1;
+		T.reset(1,tmp);
+		for(Node j:g[i])ans[j.id]=Mod(ans[j.id],Mod(mod,T.query(1,n,1,j.l,j.r)*j.s));
+	}
+	rep(i,1,q)printf(&quot;%d\n&quot;,ans[i]);
+}
+signed main(){
+	int t=1;
+	//	scanf(&quot;%d&quot;,&amp;t);
+	while(t--)
+		Yorushika();
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://littleyinhee.github.io/post/p7758/">
+              <h3 class="post-title">
+                P7758
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li35pGBlywyjSUA2',
+    clientSecret: '11f3bba812e7f922722ed0ec9c89d0af064dd31b',
+    repo: 'littleyinhee.github.io',
+    owner: 'littleyinhee',
+    admin: ['littleyinhee'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://littleyinhee.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

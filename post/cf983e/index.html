@@ -1,0 +1,340 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CF983E | yinhee</title>
+<link rel="shortcut icon" href="https://littleyinhee.github.io/favicon.ico?v=1723204610414">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://littleyinhee.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CF983E | yinhee - Atom Feed" href="https://littleyinhee.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="对于每次询问，我们可以看成是两个点都不断往上跳（如果一个点是另一个点的祖先则是只有一个跳），有一个很明显的贪心策略：每次都跳到能跳到的深度最小的点。然而一次一次往上跳可能被极端数据卡掉，所以要用倍增维护跳 2i2^i2i 次能跳到哪里。
+然..." />
+    <meta name="keywords" content="树,数据结构" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://littleyinhee.github.io">
+  <img class="avatar" src="https://littleyinhee.github.io/images/avatar.png?v=1723204610414" alt="">
+  </a>
+  <h1 class="site-title">
+    yinhee
+  </h1>
+  <p class="site-description">
+    梦境原来就是回忆的足迹
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              CF983E
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-05-27
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://littleyinhee.github.io/tag/WsVrmhoxa/" class="post-tag">
+                  # 树
+                </a>
+              
+                <a href="https://littleyinhee.github.io/tag/62NLXw5-u0/" class="post-tag">
+                  # 数据结构
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>对于每次询问，我们可以看成是两个点都不断往上跳（如果一个点是另一个点的祖先则是只有一个跳），有一个很明显的贪心策略：每次都跳到能跳到的深度最小的点。然而一次一次往上跳可能被极端数据卡掉，所以要用倍增维护跳 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">2^i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span> 次能跳到哪里。</p>
+<p>然而两个点都跳到他们的 <code>lca</code> 上并不一定是最优方案，所以可以让两个点都跳到差一步能跳到 <code>lca</code> 的位置，然后判断是否有一条路直接联通两个点。对于这个问题，我们可以处理出 <code>dfs</code> 序，将每一条公交车线路看成是坐标系上 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>u</mi></msub><mo separator="true">,</mo><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>v</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">(dfn_u,dfn_v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的一个点，每次询问就是判断左下角是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>u</mi></msub><mo separator="true">,</mo><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>v</mi></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">(dfn_u,dfn_v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，右上角是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>n</mi><msub><mi>d</mi><mi>u</mi></msub><mo separator="true">,</mo><mi>e</mi><mi>n</mi><msub><mi>d</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">end_u,end_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的矩形内是否有点，其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>n</mi><msub><mi>d</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">end_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 的子树中点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">n</span></span></span></span> 的最大值。可以转化成二维偏序问题，用树状数组维护。其中要特判一下一个点是另一个点的祖先的情况，直接跳即可。</p>
+<p>code：</p>
+<pre><code class="language-cpp">int n,m,q,e[maxn],ans[maxn],res[maxn&lt;&lt;2],fm[maxn][22];
+int siz[maxn],dep[maxn],fa[maxn],wt[maxn];
+int cnt,top[maxn],dfn[maxn];
+int tot,head[maxn];
+bool vis[maxn];
+struct node{
+	int to,nxt;
+}edge[maxn&lt;&lt;1];
+struct zb{
+	int x,y,id;
+	bool operator&lt;(const zb &amp;tmp)const{return x&lt;tmp.x;}
+}qry[maxn&lt;&lt;2];
+std::pii d[maxn&lt;&lt;1];
+inline void add(int u,int v){
+	edge[++tot]={v,head[u]};
+	head[u]=tot;
+}
+inline int lowbit(int x){return x&amp;(-x);}
+inline void update(int x){
+	while(x&lt;=n)e[x]++,x+=lowbit(x);
+}
+inline int query(int x){
+	int ret=0;
+	while(x)ret+=e[x],x-=lowbit(x);
+	return ret;
+}
+void dfs1(int u,int f){
+	fa[u]=f;siz[u]=1;
+	for(int i=head[u];i;i=edge[i].nxt){
+		int v=edge[i].to;
+		if(v==f)continue;
+		dep[v]=dep[u]+1;
+		dfs1(v,u);
+		siz[u]+=siz[v];
+		if(siz[v]&gt;siz[wt[u]])wt[u]=v;
+	}
+}
+void dfs2(int u,int t){
+	top[u]=t;dfn[u]=++cnt;
+	if(!wt[u])return;
+	dfs2(wt[u],t);
+	for(int i=head[u];i;i=edge[i].nxt){
+		int v=edge[i].to;
+		if(v==fa[u]||v==wt[u])continue;
+		dfs2(v,v);
+	}
+}
+void dfs3(int u){//处理跳一次能跳到哪里
+	for(int i=head[u];i;i=edge[i].nxt){
+		int v=edge[i].to;
+		if(v==fa[u])continue;
+		dfs3(v);
+		if(~fm[v][0])fm[u][0]=dep[fm[v][0]]&lt;dep[fm[u][0]]?fm[v][0]:fm[u][0];
+	}
+	if(fm[u][0]==u||!fm[u][0])fm[u][0]=-1;
+}
+void dfs4(int u){//倍增
+	for(int i=1;i&lt;=20;i++){
+		if(~fm[u][i-1])fm[u][i]=fm[fm[u][i-1]][i-1];
+		else fm[u][i]=-1;
+	}
+	for(int i=head[u];i;i=edge[i].nxt){
+		int v=edge[i].to;
+		if(v==fa[u])continue;
+		dfs4(v);
+	}
+}
+int get_lca(int u,int v){
+	while(top[u]!=top[v]){
+		if(dep[top[u]]&lt;dep[top[v]])swap(u,v);
+		u=fa[top[u]];
+	}
+	return dep[u]&lt;dep[v]?u:v;
+}
+int get_ans(int u,int v,int k){//两个/一个点往上跳
+	int w=get_lca(u,v),ret=0;
+	if(w==u){
+		for(int i=20;~i;i--){
+			if(~fm[v][i]&amp;&amp;dep[fm[v][i]]&gt;dep[w])v=fm[v][i],ret+=(1&lt;&lt;i);
+		}
+		return ~fm[v][0]?ret+1:-1;
+	}else if(w==v){
+		for(int i=20;~i;i--){
+			if(~fm[u][i]&amp;&amp;dep[fm[u][i]]&gt;dep[w])u=fm[u][i],ret+=(1&lt;&lt;i);
+		}
+		return ~fm[u][0]?ret+1:-1;
+	}else{
+		for(int i=20;~i;i--){
+			if(~fm[u][i]&amp;&amp;dep[fm[u][i]]&gt;dep[w])u=fm[u][i],ret+=(1&lt;&lt;i);
+		}
+		for(int i=20;~i;i--){
+			if(~fm[v][i]&amp;&amp;dep[fm[v][i]]&gt;dep[w])v=fm[v][i],ret+=(1&lt;&lt;i);
+		}
+		vis[k]=true;	
+	}
+	int x=dfn[u],y=dfn[v],kk=k&lt;&lt;2;
+	qry[kk-3]={x+siz[u]-1,y+siz[v]-1,kk-3};qry[kk-2]={x-1,y-1,kk-2};
+	qry[kk-1]={x+siz[u]-1,y-1,kk-1};qry[kk]={x-1,y+siz[v]-1,kk};
+	return ~fm[u][0]&amp;&amp;~fm[v][0]||fm[u][0]==v||fm[v][0]==u?ret:-1;
+}
+void solve(){
+	read(n);
+	for(int u=2,v;u&lt;=n;u++){
+		read(v);
+		add(u,v);add(v,u);
+	}
+	dep[0]=inf;
+	dfs1(1,0);dfs2(1,1);
+	read(m);
+	for(int i=1,u,v;i&lt;=m;i++){
+		read(u);read(v);
+		d[(i&lt;&lt;1)-1]=mp(dfn[u],dfn[v]);d[(i&lt;&lt;1)]=mp(dfn[v],dfn[u]);
+		int w=get_lca(u,v);
+		fm[u][0]=dep[w]&lt;dep[fm[u][0]]?w:fm[u][0];
+		fm[v][0]=dep[w]&lt;dep[fm[v][0]]?w:fm[v][0];
+	}
+	dfs3(1);dfs4(1);
+	read(q);
+	for(int i=1,u,v;i&lt;=q;i++){
+		read(u);read(v);
+		ans[i]=get_ans(u,v,i);
+	}
+	const int mm=m&lt;&lt;1,qq=q&lt;&lt;2;
+	sort(d+1,d+mm+1);sort(qry+1,qry+qq+1);
+	for(int i=1,j=1;i&lt;=qq;i++){
+		while(j&lt;=mm&amp;&amp;d[j].fi&lt;=qry[i].x)update(d[j++].se);
+		res[qry[i].id]=query(qry[i].y);
+	}
+	for(int i=1;i&lt;=q;i++){
+		int now=i&lt;&lt;2;
+		if(vis[i]&amp;&amp;~ans[i]){
+			if(res[now-3]+res[now-2]-res[now-1]-res[now]==0)ans[i]+=2;
+			else ans[i]++;
+		}
+		write(ans[i]);putchar('\n');
+	}
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://littleyinhee.github.io/post/p3203/">
+              <h3 class="post-title">
+                P3203
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'Ov23li35pGBlywyjSUA2',
+    clientSecret: '11f3bba812e7f922722ed0ec9c89d0af064dd31b',
+    repo: 'littleyinhee.github.io',
+    owner: 'littleyinhee',
+    admin: ['littleyinhee'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://littleyinhee.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
