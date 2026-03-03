@@ -1,1 +1,5 @@
 /* Here is your custom css styles. */
+.toc-widget {
+    max-height: 70vh;
+    overflow-y: auto;
+}
