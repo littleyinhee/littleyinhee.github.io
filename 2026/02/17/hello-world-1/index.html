@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", function() {
     delimiters: [
       {left: "$$", right: "$$", display: true},
       {left: "$", right: "$", display: false}
-    ]
+    ],
+    throwOnError: false,
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"]
   });
 });
 </script>   
