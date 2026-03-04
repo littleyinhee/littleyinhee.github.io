@@ -11,3 +11,63 @@
     margin: 1em 0;
     overflow-x: auto;
 }
+/* Monokai Theme */
+
+pre[class*="language-"] {
+    background: #272822 !important;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+code[class*="language-"] {
+    font-family: "Fira Code", monospace;
+    font-size: 14px;
+    color: #f8f8f2;
+}
+
+/* Monokai 语法色 */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #75715e;
+}
+
+.token.keyword {
+    color: #f92672;
+}
+
+.token.string {
+    color: #e6db74;
+}
+
+.token.function {
+    color: #a6e22e;
+}
+
+.token.number {
+    color: #ae81ff;
+}
+
+.token.boolean {
+    color: #ae81ff;
+}
+
+.token.operator {
+    color: #f8f8f2;
+}
+
+.token.punctuation {
+    color: #f8f8f2;
+}
+
+.token.class-name {
+    color: #a6e22e;
+}
+
+.token.constant {
+    color: #ae81ff;
+}
