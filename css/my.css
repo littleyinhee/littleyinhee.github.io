@@ -105,7 +105,7 @@ code[class*="language-"] {
 
 .banner-avatar {
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -122,5 +122,65 @@ code[class*="language-"] {
 
 .subtitle,
 .description {
-    margin-top: -100px !important;
+    margin-top: -200px !important;
+}
+
+/* 下移 Matery 首页打字副标题 */
+.index-cover .description.center-align {
+    transform: translateY(240px) !important;
+}
+
+/* 隐藏首页 banner 按钮 */
+.index-cover .cover-btns {
+    display: none !important;
+}
+
+/* 修改 Hexo 全局 subtitle（首页大标题那一行） */
+.index-cover .title.center-align {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    font-size: 60px !important;
+    font-weight: 600 !important;
+    letter-spacing: 3px;
+}
+
+/* 首页标题：强制一行 + 完美居中 */
+.index-cover .title.center-align {
+    white-space: nowrap !important;
+    display: inline-block !important;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-down-btn {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 30px;
+    color: #ffffff;
+
+    animation: bounce 3s infinite;
+}
+
+/* 关键：左右拉伸 */
+.scroll-down-btn i {
+    transform: scaleX(1.8);   /* 数值越大越宽 */
+}
+
+/* 整体上下浮动 */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(12px);
+    }
 }

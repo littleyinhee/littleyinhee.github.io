@@ -458,13 +458,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 
             </div>
             <div class="cover-social-link">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/NatsuYume-yh" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:NatsuYume-yh@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -493,6 +493,10 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 
     
+    <div class="scroll-down-btn" onclick="slowScroll()">
+        <i class="fas fa-angle-down"></i>
+        <i class="fas fa-angle-down"></i>
+    </div>
 </div>
 
 <script>
@@ -555,6 +559,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         
     });
+function slowScroll() {
+    const target = window.innerHeight;
+    const start = window.scrollY;
+    const distance = target - start;
+    const duration = 1200;  // 时间（毫秒），越大越慢
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        window.scrollTo(0, start + distance * easeInOut(progress));
+        if (progress < 1) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    function easeInOut(t) {
+        return t < 0.5
+            ? 2 * t * t
+            : -1 + (4 - 2 * t) * t;
+    }
+
+    requestAnimationFrame(animation);
+}
 </script>
 
 
@@ -609,7 +638,7 @@ document.addEventListener("DOMContentLoaded", function() {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2026/03/02/hello-world%20-%20%E5%89%AF%E6%9C%AC/">
+                    <a href="/2026/03/06/hello-world/">
                         <div class="card-image">
                             
                             
@@ -622,13 +651,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                114514
-
+                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-06
                             </span>
                             <span class="publish-author">
                                 
@@ -647,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function() {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2026/03/02/hello-world/">
+                    <a href="/2026/03/06/hello-world%20-%20%E5%89%AF%E6%9C%AC/">
                         <div class="card-image">
                             
                             
@@ -660,12 +688,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                                114514
+
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-06
                             </span>
                             <span class="publish-author">
                                 
@@ -866,13 +895,13 @@ document.addEventListener("DOMContentLoaded", function() {
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/NatsuYume-yh" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:NatsuYume-yh@outlook.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
