@@ -250,3 +250,62 @@ code[class*="language-"] {
 .post-card img{
   pointer-events:none;
 }
+
+/* 顶栏整体透明（所有状态） */
+#header,
+#header nav,
+#header .nav-wrapper,
+.navbar-fixed,
+.navbar-fixed nav,
+.navbar-fixed.nav-color nav,
+.navbar-fixed.nav-transparent nav {
+    background: transparent !important;
+}
+
+/* 顶栏文字描边（抗背景干扰） */
+nav a,
+nav .brand-logo {
+    color: #fff !important;
+    text-shadow:
+        -1px -1px 2px rgba(0,0,0,0.8),
+         1px -1px 2px rgba(0,0,0,0.8),
+        -1px  1px 2px rgba(0,0,0,0.8),
+         1px  1px 2px rgba(0,0,0,0.8);
+}
+
+/* ===== 强制顶栏毛玻璃（无视 Matery 结构） ===== */
+
+/* 所有可能的顶栏容器 */
+#header,
+#header *:not(a):not(i),
+header,
+header *,
+nav,
+nav * {
+    background: transparent !important;
+}
+
+/* 真正叠一层毛玻璃 */
+#header::before,
+header::before,
+nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+/* 修复 logo 区域被毛玻璃覆盖 */
+.logo-span,
+.logo-span * {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 防止伪元素叠到 logo 上 */
+.logo-span::before {
+    display: none !important;
+}
