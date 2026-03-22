@@ -5,7 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="寒假讲题记录, 昨日の夢">
-    <meta name="description" content="1.21 树专题 zzCF1578J Just Kingdom $\color{blue}\Diamond$首先分析这个操作造成的影响。容易发现这样对于一个点 $u$，可以把它的儿子分成两类：要么以这个儿子为根的子树内所有点的限制都被满足了">
+    <meta name="description" content="1.21 树专题 zz
+CF1578J Just Kingdom $\color{blue}\Diamond$
+首先分析这个操作造成的影响。容易发现这样对于一个点 $u$，可以把它的儿子分成两类：要么以这个儿子为根的子树内所有点的限制都被满">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -372,87 +374,118 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-21-树专题-zz"><a href="#1-21-树专题-zz" class="headerlink" title="1.21 树专题 zz"></a>1.21 树专题 zz</h2><h3 id="CF1578J-Just-Kingdom-color-blue-Diamond"><a href="#CF1578J-Just-Kingdom-color-blue-Diamond" class="headerlink" title="CF1578J Just Kingdom $\color{blue}\Diamond$"></a>CF1578J Just Kingdom $\color{blue}\Diamond$</h3><p>首先分析这个操作造成的影响。容易发现这样对于一个点 $u$，可以把它的儿子分成两类：要么以这个儿子为根的子树内所有点的限制都被满足了，要么没有。对于前者就是填满，后者会平均分剩下的。</p>
+                <h2 id="1-21-树专题-zz">1.21 树专题 zz</h2>
+<h3 id="CF1578J-Just-Kingdom-color-blue-Diamond">CF1578J Just Kingdom $\color{blue}\Diamond$</h3>
+<p>首先分析这个操作造成的影响。容易发现这样对于一个点 $u$，可以把它的儿子分成两类：要么以这个儿子为根的子树内所有点的限制都被满足了，要么没有。对于前者就是填满，后者会平均分剩下的。</p>
 <p>那么此时就有一个 $O(n^2)$ 的暴力：对于每个点，从它往上跳并维护当前需要的钱 $lim$。转移是 $lim\leftarrow \sum_{v\in son_u}\min(siz_v,lim)$。</p>
 <p>考虑优化。$\color{blue}\Diamond$ 对于这种将一个值变为和其他某个值相关的 $\min$ 的东西，可以考虑当 $\min$ 去到它本身时，它的值至少翻倍。而注意到 $siz_v\le nV$，所以这样的关键点只有 $O(\log n+\log V)$ 个。</p>
 <p>后面的实现部分不是重点，倍增预处理一些东西，查询时二分即可。</p>
-<h3 id="CF1423C-Dusan’s-Railway"><a href="#CF1423C-Dusan’s-Railway" class="headerlink" title="CF1423C Dušan’s Railway"></a>CF1423C Dušan’s Railway</h3><p>构造题。</p>
+<h3 id="CF1423C-Dusan-s-Railway">CF1423C Dušan's Railway</h3>
+<p>构造题。</p>
 <p>首先题目给的这个限制太奇怪了，尝试进行一个翻译。一个很不知道怎么样得到的想法是，你要构造一种存储 $10n$ 条路径的数据结构，使得任意一条树上的路径都能用其中的不超过 $3$ 条拼出来。</p>
 <p>树太困难了，考虑序列。如果限制是 $2$ 条的话，显然可以想到分治，进而想到猫树。但是 $2n\log n$ 还是太多了点。但是这里是 $3$ 条，发现一般的分块查询就是一个块的后缀+若干个块+一个块的前缀正好 $3$ 条。然后对于每个块递归做。</p>
-<p>可以证明递归不超过 $O(\log\log n)$ 层，虽然我不知道怎么证。每层 $\frac 52n$ 条边。 </p>
+<p>可以证明递归不超过 $O(\log\log n)$ 层，虽然我不知道怎么证。每层 $\frac 52n$ 条边。</p>
 <p>放到树上，树分块。复杂度不变，但是可能常数大一点，但是这个上界卡的不死。可以通过。实现方法是在当前连通块 $siz\ge B$ 时分出去。</p>
-<h3 id="qoj9905-哈夫曼树-color-blue-Diamond"><a href="#qoj9905-哈夫曼树-color-blue-Diamond" class="headerlink" title="qoj9905 哈夫曼树 $\color{blue}\Diamond$"></a>qoj9905 哈夫曼树 $\color{blue}\Diamond$</h3><p>最重要的显然是找到一个可维护的条件，表示出这个树是否合法。</p>
+<h3 id="qoj9905-哈夫曼树-color-blue-Diamond">qoj9905 哈夫曼树 $\color{blue}\Diamond$</h3>
+<p>最重要的显然是找到一个可维护的条件，表示出这个树是否合法。</p>
 <p>然后就有一个非常厉害的条件：$\color{blue}\Diamond$ 将所有非叶节点的左右儿子对应权值对应的二元组 $[x,y)(x\le y)$ 提取出来，对二元组排序，如果两两间无交则有解。</p>
 <p>充分性考虑可以按照排序后的顺序进行操作构造出一组解。必要性考虑若不成立，有交的两组中小的两个应该一起操作。</p>
 <p>但是带修。不过发现这不重要，因为这棵树的深度不会很深，否则会不满足哈夫曼树性质。上界大概是 $O(\log n+\log V)$。所以更新的时候暴力跳父亲即可，用 set 维护二元组。</p>
-<h3 id="CF1284F-New-Year-and-Social-Network-color-blue-Diamond"><a href="#CF1284F-New-Year-and-Social-Network-color-blue-Diamond" class="headerlink" title="CF1284F New Year and Social Network $\color{blue}\Diamond$"></a>CF1284F New Year and Social Network $\color{blue}\Diamond$</h3><p>二分图最大匹配，首先联想到 Hall 定理。是否有完美匹配？考虑对于 $T_1$ 上的一个边集 $S$，断开后分成若干个连通块，与其在二分图有边的 $T_2$ 上的边满足其连接的两个点不属于 $T_1$ 中的同一连通块。容易发现这些边至少有 $|S|$ 条，故有完美匹配。</p>
+<h3 id="CF1284F-New-Year-and-Social-Network-color-blue-Diamond">CF1284F New Year and Social Network $\color{blue}\Diamond$</h3>
+<p>二分图最大匹配，首先联想到 Hall 定理。是否有完美匹配？考虑对于 $T_1$ 上的一个边集 $S$，断开后分成若干个连通块，与其在二分图有边的 $T_2$ 上的边满足其连接的两个点不属于 $T_1$ 中的同一连通块。容易发现这些边至少有 $|S|$ 条，故有完美匹配。</p>
 <p>然后考虑构造。$\color{blue}\Diamond$ 对于这样和顺序无关的，可以考虑从简单情况入手，递归到子问题。考虑每次取出 $T_1$ 上的一个叶子以及其父边 $(u,v)$。然后考虑 $T_2$ 上的 $u\to v$ 的路径。由于显然有 $u$ 属于 $T_1$ 中 $u$ 所在的连通块，$v$ 属于 $v$ 所在的，所以路径上一定有一条边 $(x,y)$，满足 $x,y$ 不在同一连通块。然后只需要把 $(u,v),(x,y)$ 缩成一个点变成子问题即可。实现上可以在 $T_2$ 上二分找到 $x,y$。</p>
-<h3 id="qoj2562-Fake-Plastic-Trees-2-color-blue-Diamond"><a href="#qoj2562-Fake-Plastic-Trees-2-color-blue-Diamond" class="headerlink" title="qoj2562 Fake Plastic Trees 2 $\color{blue}\Diamond$"></a>qoj2562 Fake Plastic Trees 2 $\color{blue}\Diamond$</h3><p>第二次听了，发现并不难理解？</p>
+<h3 id="qoj2562-Fake-Plastic-Trees-2-color-blue-Diamond">qoj2562 Fake Plastic Trees 2 $\color{blue}\Diamond$</h3>
+<p>第二次听了，发现并不难理解？</p>
 <p>首先有一个显然的 dp：设 $dp_{u,i,j}$ 表示 $u$ 子树内断了 $i$ 条边，当前 $u$ 所在连通块的权值和为 $j$ 的方案数。这个 dp 的问题显然是值域非常大。考虑是否能缩小值域。注意到对于一个点 $u$，由于除了它所在的连通块，其他连通块都是满足条件的，所以它所在的连通块的和的取值最多只有 $i(R-L)$ 种。</p>
-<p>还不够。再进一步发掘性质。然后发现，如果对于一个 $u,i$，存在 $j_1&lt;j_2&lt;j_3,j_3-j_1&lt;R-L$ 使得 $dp_{u,i,j_1&#x2F;j_2&#x2F;j_3}&#x3D;1$，则这个 $j_2$ 就是没用的，$j_1$ 和 $j_3$ 中一定有一个可以替代它。但是写的时候才发现我并没有完全理解怎么证明，待补。</p>
+<p>还不够。再进一步发掘性质。然后发现，如果对于一个 $u,i$，存在 $j_1&lt;j_2&lt;j_3,j_3-j_1&lt;R-L$ 使得 $dp_{u,i,j_1/j_2/j_3}=1$，则这个 $j_2$ 就是没用的，$j_1$ 和 $j_3$ 中一定有一个可以替代它。但是写的时候才发现我并没有完全理解怎么证明，待补。</p>
 <p>于是用个 vector 存可行的 dp 位置，按照树形 dp 暴力合并就行。复杂度 $O(nk^3)$。</p>
 <p>$\color{blue}\Diamond$ 关于容量为 $m$ 的树上背包的复杂度为 $O(nm)$ 的证明：把子树分成 $siz&gt;m$ 的大子树和 $siz\le m$ 的小子树。</p>
 <p>首先对于小子树中的合并，每个点被计算的点对都只有 $O(m)$ 个，这部分就是 $O(nm)$ 的。</p>
 <p>然后，当小子树被合并到大子树时，由于每个点只会被合并一次，所以这部分也是 $O(nm)$ 的。</p>
-<p>最后，大子树和大子树的合并只会发生 $O(\frac nm)$ 次，所以复杂度为 $O(\frac nm\times m^2)&#x3D;O(nm)$。所以总复杂度也是 $O(nm)$ 了。</p>
-<h3 id="qoj894-Longest-Loose-Segment"><a href="#qoj894-Longest-Loose-Segment" class="headerlink" title="qoj894 Longest Loose Segment"></a>qoj894 Longest Loose Segment</h3><p>写着突然发现实际上非常简单。。。</p>
+<p>最后，大子树和大子树的合并只会发生 $O(\frac nm)$ 次，所以复杂度为 $O(\frac nm\times m^2)=O(nm)$。所以总复杂度也是 $O(nm)$ 了。</p>
+<h3 id="qoj894-Longest-Loose-Segment">qoj894 Longest Loose Segment</h3>
+<p>写着突然发现实际上非常简单。。。</p>
 <p>直接枚举最小值位置 $p$，求出以它为最小值的边界 $(l,r)$。然后考虑以此为最小值的区间可能长什么样。首先一定可以证明这个区间一定顶到了某个边界。否则考虑当前最大值在 $p$ 的左边还是右边，往对应的方向平移这个区间一定也合法。</p>
 <p>然后发现如果是区间右端点卡在 $p$，左端点没顶边界的情况，往左平移区间一定是不劣的。因为最大值不减，最小值变大。也就是说区间一定形如 $(l,x](x\ge p)$，即一定包含 $(l,p)$ 或 $(r,p)$，那么最大值就是好求的了，答案也是显然的。</p>
 <p>具体实现是用笛卡尔树。一开始题解是直接从笛卡尔树方面入手，但是自己写的时候发现直接做也是思路顺畅的。</p>
-<h3 id="qoj5418-Color-the-Tree-color-blue-Diamond"><a href="#qoj5418-Color-the-Tree-color-blue-Diamond" class="headerlink" title="qoj5418 Color the Tree $\color{blue}\Diamond$"></a>qoj5418 Color the Tree $\color{blue}\Diamond$</h3><p>首先不难发现每一层之间是独立的，所以分开做。</p>
-<p>然后有一个显然的 dp：设 $dp_u$ 为处理完 $u$ 子树内所有第 $k$ 层点的最小代价。则有 $dp_u&#x3D;\min(\sum dp_v,a_{k-dep_u})$。</p>
-<p>$\color{blue}\Diamond$ 然后注意到每次处理只关注了第 $k$ 层的点，所以考虑建出虚树。于是上面的转移式的后半就会变成 $\min\limits_{i&#x3D;dep_u}^{dep_{fa’<em>u}+1} a</em>{k-i}$。其中 $fa’_u$ 为虚树上 $u$ 的父亲。于是 st 表维护即可。</p>
-<h3 id="qoj9840-Tree-Partition-color-blue-Diamond"><a href="#qoj9840-Tree-Partition-color-blue-Diamond" class="headerlink" title="qoj9840 Tree Partition $\color{blue}\Diamond$"></a>qoj9840 Tree Partition $\color{blue}\Diamond$</h3><p>可能先会考虑树上 dp。$\color{blue}\Diamond$ 但是发现值域上连续一段这个条件相当苛刻。于是不妨转换思路，对序列 dp。</p>
+<h3 id="qoj5418-Color-the-Tree-color-blue-Diamond">qoj5418 Color the Tree $\color{blue}\Diamond$</h3>
+<p>首先不难发现每一层之间是独立的，所以分开做。</p>
+<p>然后有一个显然的 dp：设 $dp_u$ 为处理完 $u$ 子树内所有第 $k$ 层点的最小代价。则有 $dp_u=\min(\sum dp_v,a_{k-dep_u})$。</p>
+<p>$\color{blue}\Diamond$ 然后注意到每次处理只关注了第 $k$ 层的点，所以考虑建出虚树。于是上面的转移式的后半就会变成 $\min\limits_{i=dep_u}^{dep_{fa'<em>u}+1} a</em>{k-i}$。其中 $fa'_u$ 为虚树上 $u$ 的父亲。于是 st 表维护即可。</p>
+<h3 id="qoj9840-Tree-Partition-color-blue-Diamond">qoj9840 Tree Partition $\color{blue}\Diamond$</h3>
+<p>可能先会考虑树上 dp。$\color{blue}\Diamond$ 但是发现值域上连续一段这个条件相当苛刻。于是不妨转换思路，对序列 dp。</p>
 <p>于是要刻画连通块的条件。$\color{blue}\Diamond$ 考虑把连通块挂到最上面的点上，于是可以得到一个充要条件：区间内仅有一个点的父亲不在区间内。设 $dp_{i,j}$ 表示当前处理了前 $i$ 个点，形成 $j$ 个连通块的方案数。不难发现需要 $O(1)$ 转移。</p>
 <p>考虑若干条边 $(u,fa_u)$，条件就变成了区间内只有一条边是到区间外的。然后考虑到区间外的边也有两种。$u&lt;fa_u$ 的称其为后向边，否则为前向边。然后分类讨论：只有一条后向边和只有一条前向边。</p>
 <p>首先对于后向边的限制，只需要维护当前所有 $fa_u&gt;i$ 的后向边中 $u$ 的前两大值，分成两个区间即可。</p>
-<p>但是前向边比较麻烦，不过可以考虑类似扫描线地做。考虑对于每个位置维护 $f_i$ 表示跨过 $i$ 的前向边数量，然后要做的就是从所有 $f_i&#x3D;0&#x2F;1$ 的位置中的一个前缀转移，并且支持给 $f_i$ 的一个后缀加。</p>
-<p>考虑 $f_i&#x3D;0$ 的位置，每次操作都会加入一个数或者把一段后缀去掉。直接维护前缀和即可。$f_i&#x3D;1$ 的也是类似的，操作变成了把 $f_i&#x3D;0$ 的一段后缀移过来，但是发现移过来的位置中的 $mn$，其后面原来在 $f_i&#x3D;1$ 的一定已经被全部移除了。所以直接维护前缀和即可。精细一点实现就是 $O(nk+n\log n)$ 的。</p>
-<h3 id="qoj1288-Tokens-on-the-Tree"><a href="#qoj1288-Tokens-on-the-Tree" class="headerlink" title="qoj1288 Tokens on the Tree"></a>qoj1288 Tokens on the Tree</h3><p>终于到这题了🤩当时场上被创飞了。其实后面的计数并不是难点，最最最关键的还是如何算 $f(w,b)$，尝试在看题解做题后给出一个可能相对自然的思路吧。</p>
-<p>钦定 $w\ge b$，先手玩一些小的情况。容易发现当 $w&#x3D;b&#x3D;1$ 的时候，大部分情况 $f(w,b)&#x3D;1$。这是因为可以通过先“让一让”的方式使情况间互相转化。</p>
-<p>再考虑一些特殊情况，比如 $w&#x3D;2,b&#x3D;1$，树为菊花。容易发现这样答案为叶子个数，即黑点在不同的叶子是不同方案。思考一下这是为什么，会发现这是因为无论如何根都是白色，黑色就无法通过了。容易拓展到一般情况：记 $mx_u$ 表示断掉 $u$ 后形成的连通块中大小的最大值，则当 $mx_u&lt;w$ 时，$u$ 点一定为白。那么方案数就是把 $u$ 断掉后 $siz\ge b$ 的连通块数量。</p>
+<p>但是前向边比较麻烦，不过可以考虑类似扫描线地做。考虑对于每个位置维护 $f_i$ 表示跨过 $i$ 的前向边数量，然后要做的就是从所有 $f_i=0/1$ 的位置中的一个前缀转移，并且支持给 $f_i$ 的一个后缀加。</p>
+<p>考虑 $f_i=0$ 的位置，每次操作都会加入一个数或者把一段后缀去掉。直接维护前缀和即可。$f_i=1$ 的也是类似的，操作变成了把 $f_i=0$ 的一段后缀移过来，但是发现移过来的位置中的 $mn$，其后面原来在 $f_i=1$ 的一定已经被全部移除了。所以直接维护前缀和即可。精细一点实现就是 $O(nk+n\log n)$ 的。</p>
+<h3 id="qoj1288-Tokens-on-the-Tree">qoj1288 Tokens on the Tree</h3>
+<p>终于到这题了🤩当时场上被创飞了。其实后面的计数并不是难点，最最最关键的还是如何算 $f(w,b)$，尝试在看题解做题后给出一个可能相对自然的思路吧。</p>
+<p>钦定 $w\ge b$，先手玩一些小的情况。容易发现当 $w=b=1$ 的时候，大部分情况 $f(w,b)=1$。这是因为可以通过先“让一让”的方式使情况间互相转化。</p>
+<p>再考虑一些特殊情况，比如 $w=2,b=1$，树为菊花。容易发现这样答案为叶子个数，即黑点在不同的叶子是不同方案。思考一下这是为什么，会发现这是因为无论如何根都是白色，黑色就无法通过了。容易拓展到一般情况：记 $mx_u$ 表示断掉 $u$ 后形成的连通块中大小的最大值，则当 $mx_u&lt;w$ 时，$u$ 点一定为白。那么方案数就是把 $u$ 断掉后 $siz\ge b$ 的连通块数量。</p>
 <p>写的时候突然发现有个小问题：万一这样的 $u$ 不连通怎么办？其实容易发现这样的情况是不可能的。手玩一下就行。</p>
-<p>那是否，若不存在 $mx_u&lt;w$ 答案就是 $1$？考虑一条链的情况，即使 $w&#x3D;b&#x3D;1$，也会发现对于一种情况，把 $w,b$ 位置调换之后的情况是本质不同的。于是就有两种了。于是发现，这样子“调换位置”是一种很特殊的情况。若能调换位置答案就是 $1$，否则是 $2$。不会具体证明。</p>
+<p>那是否，若不存在 $mx_u&lt;w$ 答案就是 $1$？考虑一条链的情况，即使 $w=b=1$，也会发现对于一种情况，把 $w,b$ 位置调换之后的情况是本质不同的。于是就有两种了。于是发现，这样子“调换位置”是一种很特殊的情况。若能调换位置答案就是 $1$，否则是 $2$。不会具体证明。</p>
 <p>然后考虑怎么样是能调换位置的。考虑调换位置的过程，可以抽象成若干步骤：$w$ 先进一个子树，然后 $b$ 进另一个，然后 $w$ 先出来，最后 $b$ 再出来。这要求存在一个点 $u$，使得 $u$ 有两个 $siz\ge w$ 和一个 $siz\ge b$ 的子树。</p>
 <p>然后就可以计数了。由于要考虑 $\min mx_u$，所以拎出重心。</p>
-<p>当 $w\le mx_u$ 时，没有必须是白色的点。所以对于每个 $u$ 求出 $se_u,th_u$ 表示断掉 $u$ 后第二，三大的连通块大小，则 $ans&#x3D;1$ 的要求就是存在 $u$ 使得 $w\le se_u\wedge b\le th_u$。枚举 $w$ 扫描线，算 $b$ 的贡献即可。</p>
+<p>当 $w\le mx_u$ 时，没有必须是白色的点。所以对于每个 $u$ 求出 $se_u,th_u$ 表示断掉 $u$ 后第二，三大的连通块大小，则 $ans=1$ 的要求就是存在 $u$ 使得 $w\le se_u\wedge b\le th_u$。枚举 $w$ 扫描线，算 $b$ 的贡献即可。</p>
 <p>当 $w&gt;mx_u$ 时，必定为白色点的形成了一个包含根的连通块。于是对于每个 $u$ 算以 $u$ 为根的子树的贡献即可。具体地，会对 $w\in(mx_{fa_{u}},mx_u],b\in[1,\min(w,siz_u)]$ 的 $f(w,b)$ 有 $1$ 的贡献。直接算就行。</p>
-<p>实现上有点困难，还要处理 $w&lt;b$ 的情况，所以要还要算 $w&#x3D;b$ 的答案之和。不过也是一样的。想清楚了就没有那么难写。$O(n)$。</p>
-<h2 id="2-3-字符串"><a href="#2-3-字符串" class="headerlink" title="2.3 字符串"></a>2.3 字符串</h2><h3 id="CF1827C-Palindrome-Partition"><a href="#CF1827C-Palindrome-Partition" class="headerlink" title="CF1827C Palindrome Partition"></a>CF1827C Palindrome Partition</h3><p>“接上一个偶回文串”这个操作让我们想到 dp。设 $dp_i$ 表示以 $i$ 结尾的好串的个数，问题就是要如何不重不漏地转移，因为可能有若干个以 $i$ 结尾的偶回文串。</p>
+<p>实现上有点困难，还要处理 $w&lt;b$ 的情况，所以要还要算 $w=b$ 的答案之和。不过也是一样的。想清楚了就没有那么难写。$O(n)$。</p>
+<h2 id="2-3-字符串">2.3 字符串</h2>
+<h3 id="CF1827C-Palindrome-Partition">CF1827C Palindrome Partition</h3>
+<p>“接上一个偶回文串”这个操作让我们想到 dp。设 $dp_i$ 表示以 $i$ 结尾的好串的个数，问题就是要如何不重不漏地转移，因为可能有若干个以 $i$ 结尾的偶回文串。</p>
 <p>此时可以发现一个关键性质：只用考虑以 $i$ 结尾的最短的偶回文串。证明手玩一下不想写了，总之就是更长的一定可以拆成若干个短的。所以只用处理出来以 $i$ 结尾的最短的偶回文串长度即可。这个随便怎么处理都行。</p>
-<h3 id="CF1913F-Palindromic-Problem"><a href="#CF1913F-Palindromic-Problem" class="headerlink" title="CF1913F Palindromic Problem"></a>CF1913F Palindromic Problem</h3><p>直接算。先算减少的。考虑以 $i$ 为中心的极长回文串长度为 $n$。那么如果改变了一个在该串中位置为 $x$ 的字符就会减少 $\min(x,n-x+1)$ 个回文子串。manacher 找出来极长回文串，需要维护区间加公差为 $1&#x2F;-1$ 的等差数列。二阶差分即可。</p>
+<h3 id="CF1913F-Palindromic-Problem">CF1913F Palindromic Problem</h3>
+<p>直接算。先算减少的。考虑以 $i$ 为中心的极长回文串长度为 $n$。那么如果改变了一个在该串中位置为 $x$ 的字符就会减少 $\min(x,n-x+1)$ 个回文子串。manacher 找出来极长回文串，需要维护区间加公差为 $1/-1$ 的等差数列。二阶差分即可。</p>
 <p>再算多的。对于一个极长回文串，如果改变后新的极长串长度变了，那么一定要改原极长串左边或右边的第一个字符，变化的长度就是原串左边部分倒过来和右边部分的 lcp。二分哈希。最后枚举所有方案算答案即可。</p>
-<h3 id="P10716-简单的字符串问题"><a href="#P10716-简单的字符串问题" class="headerlink" title="P10716 简单的字符串问题"></a>P10716 简单的字符串问题</h3><p>首先注意 $S[1,i]$ 开头结尾都有 $A$，所以 $A$ 一定是 $S[1,i]$ 的一个 border。并且容易发现有单调性：如果更长的 border 合法，那么更短的也合法。</p>
+<h3 id="P10716-简单的字符串问题">P10716 简单的字符串问题</h3>
+<p>首先注意 $S[1,i]$ 开头结尾都有 $A$，所以 $A$ 一定是 $S[1,i]$ 的一个 border。并且容易发现有单调性：如果更长的 border 合法，那么更短的也合法。</p>
 <p>于是考虑建出失配树，询问的时候在树上倍增，于是需要求 $S[1,j]$ 在 $S[1,i]$ 中出现了多少次。容易发现存储下 $S[1,j]$ 所有不重复出现位置，最多有 $O(n\log n)$ 个元素，是可以接受的。于是对于一个长度 $len$，只用查询某一个后缀 $[x,n]$ 第一个 $\operatorname{lcp}(S[1,n],S[i,n])$ 的 $i$ 的位置即可。从小到大处理 $len$，二分哈希预处理出每个后缀和 $S$ 的 lcp。问题变成支持删数，找 $p$ 的后继。set 就行。</p>
 <p>询问的时候也是二分就行。Go and learn binary search。</p>
-<h3 id="CF1975G-Zimpha-Fan-Club"><a href="#CF1975G-Zimpha-Fan-Club" class="headerlink" title="CF1975G Zimpha Fan Club"></a>CF1975G Zimpha Fan Club</h3><p>首先我们有个非常牛的东西：带适配符的模式串与文本串匹配。</p>
-<p>首先考虑没有通配符。显然可以 kmp。但是有没有其他方法？有的，有的。考虑给每个字符赋一个权，那么两个字符等价于 $a_i&#x3D;b_j$。那么考虑 $s[1,n]$ 和 $t[p,p+n-1]$ 匹配就等价于 $\sum a_i-b_{p+i-1}&#x3D;0$。。。吗。发现并不是，因为如果正负号不一样就影响了。于是变成 $(a_i-b_j)^2$。拆开变成 $\sum a_i^2-2a_ib_j+b_j^2$。同时注意到这里的 $j-i&#x3D;p-1$，于是可以卷积。</p>
+<h3 id="CF1975G-Zimpha-Fan-Club">CF1975G Zimpha Fan Club</h3>
+<p>首先我们有个非常牛的东西：带适配符的模式串与文本串匹配。</p>
+<p>首先考虑没有通配符。显然可以 kmp。但是有没有其他方法？有的，有的。考虑给每个字符赋一个权，那么两个字符等价于 $a_i=b_j$。那么考虑 $s[1,n]$ 和 $t[p,p+n-1]$ 匹配就等价于 $\sum a_i-b_{p+i-1}=0$。。。吗。发现并不是，因为如果正负号不一样就影响了。于是变成 $(a_i-b_j)^2$。拆开变成 $\sum a_i^2-2a_ib_j+b_j^2$。同时注意到这里的 $j-i=p-1$，于是可以卷积。</p>
 <p>然后加通配符。不难发现可以把通配符的权设为 $0$，变成 $a_ib_j(a_i-b_j)^2$。一样做。</p>
 <hr>
 <p>回到原题。首先发现 $s,t$ 都没有 $*$ 的显然是简单的。对于都有的，考虑每次拎出来 $s,t$ 的第一个或最后一个字符。如果有 * 就不管了。否则如果不同显然无解，相同就直接删掉。最后两个串一定有第一个字符为 * 或最后一个为 * 的。这样显然是可以构造出来的。</p>
-<p>否则考虑变成形如 $<em>s_1</em>s_2<em>s_3</em>…<em>s_m</em>$ 和 $t$ 匹配。显然对于每个 $s_i$ 贪心地找到 $t$ 中最前的匹配位置最优。怎么找？显然要用上面那个东西。但是这不支持增量。怎么办。注意到如果对 $s$ 中长为 $n$ 和 $t$ 中长为 $m$ 的做，那么要不找到，要不可以确定 $t$ 中前 $m-n+1$ 个位置不存在可匹配的，做一次的复杂度为 $(m+n)\log(m+n)$。<del>这么看取 $m&#x3D;3n$ 好像更优</del>每次取 $m&#x3D;2n$做即可。$O(n\log n)$。</p>
-<h3 id="P7735-轻重边"><a href="#P7735-轻重边" class="headerlink" title="P7735 轻重边"></a>P7735 轻重边</h3><p>一个非常厉害的结论：将操作变成链上打时间戳，于是注意到一条边为重边 $\iff$ 两个端点时间戳相同。于是直接嗯线段树维护即可。</p>
+<p>否则考虑变成形如 $<em>s_1</em>s_2<em>s_3</em>...<em>s_m</em>$ 和 $t$ 匹配。显然对于每个 $s_i$ 贪心地找到 $t$ 中最前的匹配位置最优。怎么找？显然要用上面那个东西。但是这不支持增量。怎么办。注意到如果对 $s$ 中长为 $n$ 和 $t$ 中长为 $m$ 的做，那么要不找到，要不可以确定 $t$ 中前 $m-n+1$ 个位置不存在可匹配的，做一次的复杂度为 $(m+n)\log(m+n)$。<s>这么看取 $m=3n$ 好像更优</s>每次取 $m=2n$做即可。$O(n\log n)$。</p>
+<h3 id="P7735-轻重边">P7735 轻重边</h3>
+<p>一个非常厉害的结论：将操作变成链上打时间戳，于是注意到一条边为重边 $\iff$ 两个端点时间戳相同。于是直接嗯线段树维护即可。</p>
 <p>当然有更无脑的做法。这里变成黑白。重剖，考虑维护重边的颜色，轻边暴力并在询问时处理。不难发现只需要暴力处理链上的轻边、跳重链时起点重儿子对应的边以及 lca 的父边（口胡的应该没错吧）。一堆细节。</p>
-<h3 id="CF1930H-Interactive-Mex-Tree"><a href="#CF1930H-Interactive-Mex-Tree" class="headerlink" title="CF1930H Interactive Mex Tree"></a>CF1930H Interactive Mex Tree</h3><p>首先对于查询 $\min$ 这个操作，由定义知 $\operatorname{mex}(S)&#x3D;\min(\mathbb{N}\setminus S)$。于是就是需要找到一种方法找出 $5$ 个集合，其并集为所有不在路径上的节点。</p>
+<h3 id="CF1930H-Interactive-Mex-Tree">CF1930H Interactive Mex Tree</h3>
+<p>首先对于查询 $\min$ 这个操作，由定义知 $\operatorname{mex}(S)=\min(\mathbb{N}\setminus S)$。于是就是需要找到一种方法找出 $5$ 个集合，其并集为所有不在路径上的节点。</p>
 <p>由于是在不知道是怎么想出来的所以直接放结论了。。先考虑 $u$ 为 $v$ 祖先的情况。先令 $p_1$ 为 dfn 序。先问 $[1,dfn_u-1],[dfn_v+1,n]$。发现剩下一堆 $u\to v$ 链上某个点的不在链上的儿子的子树。于是令 $p_2$ 为出栈序 dfe。由定义知 $[1,dfe_u]$ 包含了所有 $dfn_i\in[1,dfn_u-1]$ 并且不为 $u$ 祖先的 $i$。所以再拼上 $[1,dfe_v-1]$ 即可。</p>
 <p>对于 $u,v$ 没有祖先关系的情况也是类似的，手玩一下即可得到。</p>
-<h3 id="CF772E-Verifying-Kingdom"><a href="#CF772E-Verifying-Kingdom" class="headerlink" title="CF772E Verifying Kingdom"></a>CF772E Verifying Kingdom</h3><p>交互题，于是考虑这个操作能干什么。考虑一个点 $x$，如果询问 $x,y,z$，令 $d&#x3D;\operatorname{LCA}(y,z)(d\not&#x3D;x)$，则如果返回 $d$ 最深，那么可以知道 $x$ 不在 $d$ 子树内。否则若 $\operatorname{LCA}(x,y)$ 深则 $x$ 在 $d$ 的儿子中靠近 $x$ 方向的子树，反之亦然。</p>
+<h3 id="CF772E-Verifying-Kingdom">CF772E Verifying Kingdom</h3>
+<p>交互题，于是考虑这个操作能干什么。考虑一个点 $x$，如果询问 $x,y,z$，令 $d=\operatorname{LCA}(y,z)(d\not=x)$，则如果返回 $d$ 最深，那么可以知道 $x$ 不在 $d$ 子树内。否则若 $\operatorname{LCA}(x,y)$ 深则 $x$ 在 $d$ 的儿子中靠近 $x$ 方向的子树，反之亦然。</p>
 <p>然后就要考虑如何去用这个操作。换个方向考虑上面的分析，容易发现：如果能找到一个非叶子节点的两个儿子子树内各一个点，那么就能知道任意一点相对这个非叶子节点的位置。那么不断对同一个未知位置的叶子操作，就能得到其真实位置。</p>
 <p>但是问题是这样依次确定叶子位置时，很多叶子一开始是不知道的。但是注意到我们只需要知道该叶子相对当前已知叶子的位置，不断加叶子就能得到答案。于是考虑动态维护当前已知叶子构成的虚树，每次加叶子并对虚树形态进行修改即可。</p>
 <p>最后，现在这个做法还是询问次数还是 $O(n^2)$ 的。但是不难想到可以套个点分，询问次数就是 $O(n\log n)$ 的了。</p>
-<h3 id="P5439-永恒"><a href="#P5439-永恒" class="headerlink" title="P5439 永恒"></a>P5439 永恒</h3><p>说实话好像就是直接做。题意即求：<br>$$<br>\sum_{u&lt;v}\sum_{x&lt;y\wedge x,y\in u\rightsquigarrow v}dep_{\operatorname{LCA}’(x,y)}<br>$$<br>那么套路算 $x,y$ 的贡献。首先分 $x,y$ 之间是否有祖先关系的情况讨论 $x,y$ 被 $T_1$ 的多少条路径包含。而 $dep_{\operatorname{LCA(x,y)}}$ 根据经典套路可以在 $T_2$ 上做链加链求和。具体实现的时候似乎可以稍微容斥一下多的贡献，总之就是忘了当时是怎么写的，应该不难写。</p>
-<h3 id="CF1930G-Prefix-Max-Set-Counting"><a href="#CF1930G-Prefix-Max-Set-Counting" class="headerlink" title="CF1930G Prefix Max Set Counting"></a>CF1930G Prefix Max Set Counting</h3><p>似乎没有比 dp 更好的处理方法。但是一个问题是 dp 枚举的顺序。但是注意到，dfs 序是进入一个子树就要把这个子树走完才能出去。于是如果当前节点有若干个儿子，那 dp 的时候一定是从 $\max_{u\in son_i}u$ 小的 $son_i$ 开始遍历到大的，dp 时这样 dfs 就行。</p>
+<h3 id="P5439-永恒">P5439 永恒</h3>
+<p>说实话好像就是直接做。题意即求：
+$$
+\sum_{u&lt;v}\sum_{x&lt;y\wedge x,y\in u\rightsquigarrow v}dep_{\operatorname{LCA}'(x,y)}
+$$
+那么套路算 $x,y$ 的贡献。首先分 $x,y$ 之间是否有祖先关系的情况讨论 $x,y$ 被 $T_1$ 的多少条路径包含。而 $dep_{\operatorname{LCA(x,y)}}$ 根据经典套路可以在 $T_2$ 上做链加链求和。具体实现的时候似乎可以稍微容斥一下多的贡献，总之就是忘了当时是怎么写的，应该不难写。</p>
+<h3 id="CF1930G-Prefix-Max-Set-Counting">CF1930G Prefix Max Set Counting</h3>
+<p>似乎没有比 dp 更好的处理方法。但是一个问题是 dp 枚举的顺序。但是注意到，dfs 序是进入一个子树就要把这个子树走完才能出去。于是如果当前节点有若干个儿子，那 dp 的时候一定是从 $\max_{u\in son_i}u$ 小的 $son_i$ 开始遍历到大的，dp 时这样 dfs 就行。</p>
 <p>然后考虑怎么转移。首先 $i$ 如果能成为前缀最大值，那么它一定比它所有的祖先要大。然后考虑怎么样的 $j$ 能转移到 $i$。分两种情况讨论：</p>
 <ul>
 <li>$j$ 为 $i$ 的祖先。那么 $j$ 是 $i$ 祖先中的 $\max$。</li>
-<li>否则，$j$ 一定要比 $i$ 的所有祖先大。并且令 $d&#x3D;\operatorname{LCA}(i,j)$，则 $j$ 一定是 $d$ 在 $j$ 方向的儿子子树内的最大值。否则在进入 $d$ 在 $i$ 方向儿子子树时，当前的前缀 $\max$ 一定不是 $j$。</li>
+<li>否则，$j$ 一定要比 $i$ 的所有祖先大。并且令 $d=\operatorname{LCA}(i,j)$，则 $j$ 一定是 $d$ 在 $j$ 方向的儿子子树内的最大值。否则在进入 $d$ 在 $i$ 方向儿子子树时，当前的前缀 $\max$ 一定不是 $j$。</li>
 </ul>
 <p>然后考虑怎么维护。$j$ 为 $i$ 祖先的部分是简单的。否则，考虑在 $j$ 出栈时更新。先将 $j$ 的所有儿子对应子树的贡献去除，再加上 $j$ 子树的贡献。同时要求 $j&lt;i$，所以再用 BIT 维护即可。</p>
-<h2 id="2-7-贪心构造博弈-hkk"><a href="#2-7-贪心构造博弈-hkk" class="headerlink" title="2.7 贪心构造博弈 hkk"></a>2.7 贪心构造博弈 hkk</h2><h3 id="P4704-太极剑"><a href="#P4704-太极剑" class="headerlink" title="P4704 太极剑"></a>P4704 太极剑</h3><p>结果发现我完全没有理解这个断环成链！！！</p>
+<h2 id="2-7-贪心构造博弈-hkk">2.7 贪心构造博弈 hkk</h2>
+<h3 id="P4704-太极剑">P4704 太极剑</h3>
+<p>结果发现我完全没有理解这个断环成链！！！</p>
 <p>称切的线和圆的交点为切点。首先有个重要性质：所有绳子都被切断 $\iff$ 绳子分开的两条弧上都有切点。证明可以考虑断环成链，变成对于每个区间 $[l,r]$，$[l,r]$ 和 $[1,l-1]\cup[r+1,2n]$ 都有切点。然后将 $2k$ 个切点排序，实际上的切线选 $(1,k+1),(2,k+2),\cdots,(k,2k)$。容易发现这样一定每个 $[l,r]$ 都和某个 $[x,k+x]$ 有交。</p>
 <p>但是这样在圆上的问题还是太难做了一些。但是发现任意一个点一定会在一条绳子的其中一边，于是先枚举一个一定选的点，剩下的限制就全部变成断环成链后，要求某个区间内一定要选点。</p>
 <p>容易发现虽然这些区间对应序列上的位置会变化，但是在所有的 $[l,r],[r,l+2n],[l+2n,r+2n]$ 中（也就是断环成链后 $[l,r]$ 可能对应的区间），每一次断环成链对应的 $[p,p+2n)$ 中会且仅会包含其中的一个。于是预处理 $f_i$ 表示 $i$ 后第一个必须要有切点的位置，问题就变成了进行多少次 $i\leftarrow f_i$ 后 $i$ 比一开始增加了至少 $2n$。倍增即可。</p>
-<p>$$<br>f_{u,i}&#x3D;\sum_{dfn_v&lt;dfn_u+siz_u\wedge dep_u\le dep_v&lt; dep_u+2^i}c_u\oplus(dep_v-dep_u)<br>\<br>    f_{u,i}&#x3D;f_{u,i-1}+f_{to_u,i-1}+(cnt_{to_u,i-1,0}-cnt_{to_u,i-1,1})\times 2^{i-1}<br>\<br>$$</p>
+<p>$$
+f_{u,i}=\sum_{dfn_v&lt;dfn_u+siz_u\wedge dep_u\le dep_v&lt; dep_u+2^i}c_u\oplus(dep_v-dep_u)
+\
+f_{u,i}=f_{u,i-1}+f_{to_u,i-1}+(cnt_{to_u,i-1,0}-cnt_{to_u,i-1,1})\times 2^{i-1}
+\
+$$</p>
 
                 
             </div>
